@@ -1,0 +1,7 @@
+<resources>
+    <color name="ic_launcher_background">#000000</color>
+    <color name="reed_bg">#000000</color>
+    <color name="reed_surface">#121212</color>
+    <color name="reed_text">#FFFFFF</color>
+    <color name="reed_text_secondary">#AAAAAA</color>
+</resources>

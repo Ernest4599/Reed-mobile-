@@ -1,0 +1,7 @@
+<resources>
+    <style name="Theme.Reed" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:windowBackground">@color/reed_bg</item>
+        <item name="colorPrimary">@color/reed_text</item>
+        <item name="colorOnPrimary">@color/reed_bg</item>
+    </style>
+</resources>

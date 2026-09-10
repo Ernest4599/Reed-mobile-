@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <ImageView
+        android:id="@+id/reelThumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:background="@color/reed_surface"/>
+
+    <FrameLayout
+        android:id="@+id/reelVideoContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="true"
+        android:clipToPadding="true">
+
+        <com.ernest.reed.CropVideoView
+            android:id="@+id/reelVideo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/playButton"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:text="▶"
+        android:textSize="24sp"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:background="@drawable/circle_bg"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="12dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <View
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@drawable/circle_bg"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="8dp">
+            <TextView android:id="@+id/reelUsername"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textColor="#FFFFFF" android:textStyle="bold" android:textSize="14sp"/>
+            <TextView android:id="@+id/reelTimestamp"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textColor="#CCCCCC" android:textSize="12sp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/reelCaption"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:textSize="13sp"
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/reelActionRail"/>
+
+    <LinearLayout
+        android:id="@+id/reelActionRail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.55"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="36dp" android:layout_height="36dp"
+            android:text="+" android:textSize="20sp" android:textColor="#FFFFFF" android:gravity="center"
+            android:background="@drawable/circle_bg"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Follow" android:textSize="11sp" android:textColor="#FFFFFF" android:layout_marginBottom="18dp"/>
+
+        <ImageView android:layout_width="26dp" android:layout_height="26dp" android:src="@drawable/ic_heart"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Like" android:textSize="11sp" android:textColor="#FFFFFF" android:layout_marginBottom="18dp"/>
+
+        <ImageView android:layout_width="26dp" android:layout_height="26dp" android:src="@drawable/ic_comment"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Comment" android:textSize="11sp" android:textColor="#FFFFFF" android:layout_marginBottom="18dp"/>
+
+        <ImageView android:layout_width="26dp" android:layout_height="26dp" android:src="@drawable/ic_bookmark"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Save" android:textSize="11sp" android:textColor="#FFFFFF" android:layout_marginBottom="18dp"/>
+
+        <ImageView android:layout_width="26dp" android:layout_height="26dp" android:src="@drawable/ic_share"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Share" android:textSize="11sp" android:textColor="#FFFFFF"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
