@@ -24,11 +24,7 @@ class MainActivity : AppCompatActivity() {
     private var snapHelper: SnapHelper? = null
     private var appBarIndex: Int = 0
 
-    private val posts = mutableListOf(
-        Post("ernest", "2h", "Discipline is the real freedom.", 1200, 84, 230),
-        Post("chriskay", "2h", "Better ideas. Better days.", 856, 42, 97)
-    )
-    private val reels = mutableListOf<Reel>()
+
 
     private enum class Tab { HOME, REEL }
     private var currentTab = Tab.HOME
@@ -60,19 +56,19 @@ class MainActivity : AppCompatActivity() {
 
         feedRecycler = findViewById(R.id.feedRecycler)
         feedRecycler.layoutManager = LinearLayoutManager(this)
-        postAdapter = PostAdapter(posts)
-        reelAdapter = ReelAdapter(reels)
+        postAdapter = PostAdapter(AppData.posts)
+        reelAdapter = ReelAdapter(AppData.reels)
         feedRecycler.adapter = postAdapter
 
         val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
             if (uri != null) {
                 val mimeType = contentResolver.getType(uri) ?: ""
                 if (mimeType.startsWith("video")) {
-                    reels.add(0, Reel("you", "now", "", uri))
+                    AppData.reels.add(0, Reel("you", "now", "", uri))
                     reelAdapter.setActive(uri)
                     switchTab(Tab.REEL)
                 } else {
-                    posts.add(0, Post("you", "now", "", 0, 0, 0, uri))
+                    AppData.posts.add(0, Post("you", "now", "", 0, 0, 0, uri))
                     postAdapter.notifyItemInserted(0)
                     switchTab(Tab.HOME)
                 }
@@ -89,6 +85,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         setupBottomNav()
+
+        if (intent.getStringExtra("open_tab") == "reel") {
+            switchTab(Tab.REEL)
+        }
     }
 
     private fun switchTab(tab: Tab) {
@@ -132,16 +132,16 @@ class MainActivity : AppCompatActivity() {
         navHome.setOnClickListener { switchTab(Tab.HOME) }
         navReel.setOnClickListener { switchTab(Tab.REEL) }
         navRai.setOnClickListener {
-            selectNav(navRai)
-            Toast.makeText(this, "RAI — coming soon", Toast.LENGTH_SHORT).show()
+            startActivity(android.content.Intent(this, RaiActivity::class.java))
+            overridePendingTransition(0, 0)
         }
         navMessage.setOnClickListener {
             selectNav(navMessage)
             Toast.makeText(this, "Message — coming soon", Toast.LENGTH_SHORT).show()
         }
         navProfile.setOnClickListener {
-            selectNav(navProfile)
-            Toast.makeText(this, "Profile — coming soon", Toast.LENGTH_SHORT).show()
+            startActivity(android.content.Intent(this, ProfileActivity::class.java))
+            overridePendingTransition(0, 0)
         }
 
         selectNav(navHome)

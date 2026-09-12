@@ -20,6 +20,7 @@ class ReelAdapter(private val reels: List<Reel>) : RecyclerView.Adapter<ReelAdap
         val username: TextView = view.findViewById(R.id.reelUsername)
         val timestamp: TextView = view.findViewById(R.id.reelTimestamp)
         val caption: TextView = view.findViewById(R.id.reelCaption)
+        val seeMore: TextView = view.findViewById(R.id.reelSeeMore)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReelViewHolder {
@@ -32,6 +33,30 @@ class ReelAdapter(private val reels: List<Reel>) : RecyclerView.Adapter<ReelAdap
         holder.username.text = reel.username
         holder.timestamp.text = reel.timestamp
         holder.caption.text = reel.caption
+        holder.caption.maxLines = 2
+        holder.caption.ellipsize = android.text.TextUtils.TruncateAt.END
+        holder.seeMore.visibility = View.GONE
+
+        holder.caption.post {
+            if (holder.caption.lineCount > 2 || (holder.caption.layout?.getEllipsisCount(1) ?: 0) > 0) {
+                holder.seeMore.visibility = View.VISIBLE
+            }
+        }
+
+        var expanded = false
+        val toggleCaption = View.OnClickListener {
+            expanded = !expanded
+            if (expanded) {
+                holder.caption.maxLines = Int.MAX_VALUE
+                holder.caption.ellipsize = null
+                holder.seeMore.text = "See less"
+            } else {
+                holder.caption.maxLines = 2
+                holder.caption.ellipsize = android.text.TextUtils.TruncateAt.END
+                holder.seeMore.text = "See more"
+            }
+        }
+        holder.seeMore.setOnClickListener(toggleCaption)
 
         try {
             val retriever = MediaMetadataRetriever()

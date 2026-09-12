@@ -20,6 +20,11 @@ data class Moment(
     val imageUri: Uri? = null
 )
 
+data class RaiMessage(
+    val text: String,
+    val isUser: Boolean
+)
+
 data class Reel(
     val username: String,
     val timestamp: String,

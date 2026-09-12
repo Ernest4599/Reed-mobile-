@@ -20,6 +20,7 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
         val commentCount: TextView = view.findViewById(R.id.commentCount)
         val shareCount: TextView = view.findViewById(R.id.shareCount)
         val viewComments: TextView = view.findViewById(R.id.viewComments)
+        val followButton: TextView = view.findViewById(R.id.followButton)
     }
 
     private fun formatCount(count: Int): String {
@@ -37,12 +38,15 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         val post = posts[position]
-        holder.username.text = post.username
+        val isOwn = post.username == AppData.currentUsername
+
+        holder.username.text = if (isOwn) AppData.currentDisplayName else post.username
         holder.timestamp.text = post.timestamp
         holder.postText.text = post.text
         holder.likeCount.text = formatCount(post.likes)
         holder.commentCount.text = formatCount(post.comments)
         holder.shareCount.text = formatCount(post.shares)
+        holder.followButton.visibility = if (isOwn) View.GONE else View.VISIBLE
 
         if (post.comments > 0) {
             holder.viewComments.text = "View all ${post.comments} comments"
